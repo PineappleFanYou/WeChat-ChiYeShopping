@@ -1,0 +1,60 @@
+<!-- 搜索框 -->
+<searchInput></searchInput>
+<!-- 轮播图 -->
+<view class="index_swiper">
+<swiper indicator-dots autoplay circular>
+    <swiper-item
+        wx:for="{{imageList}}"
+        wx:for-item="item"
+        wx:for-index="index"
+        wx:key="id">
+        <image    
+        mode="widthFix"
+        src="{{item.image_src}}"></image>
+    </swiper-item>
+</swiper>
+</view>
+<!-- 分类 -->
+<view class="category">
+<navigator
+wx:for="{{catitemsList}}"
+wx:for-item="item"
+wx:key="{{item.name}}"
+url="{{item.navigator_url}}">
+<image
+src="{{item.image_src}}"
+mode="widthFix">
+</image> 
+</navigator>
+</view>
+<!-- 楼层，双层循坏 -->
+<view class="floor_content">
+<view
+class="floor_title"
+wx:for="{{floorTitle}}" 
+wx:for-item="item1"
+wx:for-index="index1"
+wx:key="item1.floor_title.name"
+>
+<image
+src="{{item1.floor_title.image_src}}"
+mode="widthFix">
+</image> 
+<!-- 二层循环 -->
+<view class="product_img clearfix">
+<view 
+class="product_list"
+wx:for="{{item1.product_list}}"
+wx:for-item="item2"
+wx:for-index="index2"
+wx:key="item2.product_list.name"
+>
+<image
+src="{{item2.image_src}}"
+>
+</image>
+</view>
+</view>
+</view>
+</view>
+
