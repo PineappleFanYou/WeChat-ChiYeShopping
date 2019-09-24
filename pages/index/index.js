@@ -1,4 +1,5 @@
 
+import { request } from '../../request/index.js'
 Page({
     data:{
         // 轮播图数组
@@ -15,38 +16,34 @@ Page({
     },
     // 获取轮播图请求
     getSwiperData() {
-            wx.request({
-                url: 'https://api.zbztb.cn/api/public/v1/home/swiperdata', 
-                success:(res)=> {          
-                    // console.log(res)    
-                this.setData({
-                    imageList : res.data.message
-                })
-                }
-              })
+      request({
+        url:"/home/swiperdata"
+      }).then(res=>{
+        // console.log(res)
+        this.setData({
+          imageList:res.data.message
+        })
+      })
+
         },
   // 获取导航分类请求
   getCatitemsData() {
-    wx.request({
-      url: 'https://api.zbztb.cn/api/public/v1/home/catitems',
-      success:(res) =>{
-        // console.table(res)
-        this.setData({
-          catitemsList:res.data.message
-        })
-      }
+    request({
+      url:"/home/catitems"
+    }).then(res=>{
+      this.setData({
+        catitemsList:res.data.message
+      })
     })
   },
   // 获取楼层请求
   getFloorData() {
-    wx.request({
-      url: 'https://api.zbztb.cn/api/public/v1/home/floordata',
-      success:(res) =>{
-        // console.log(res)
-        this.setData({
-          floorTitle: res.data.message
-        })
-      }
+    request({
+      url:"/home/floordata"
+    }).then(res=>{
+      this.setData({
+        floorTitle:res.data.message
+      })
     })
   }
 })

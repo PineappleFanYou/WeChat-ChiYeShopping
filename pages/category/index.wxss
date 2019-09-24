@@ -1,0 +1,44 @@
+.cates_view {
+  height: calc(100vh - 90rpx );
+  overflow: hidden;
+  display: flex;
+}
+.menu_group {
+  width: 200rpx;
+}
+.menu_group .menu_item {
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f4f4f4;
+  font-size: 30rpx;
+}
+.menu_group .active {
+  background-color: #fff;
+  border-left: 5rpx red solid;
+}
+.goods_list {
+  flex: 1;
+}
+.goods_list .goods_group .goods_group_title {
+  height: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
+}
+.goods_list .goods_group .goods_group_title .group_title {
+  margin: 0 20rpx;
+}
+.goods_list .goods_group .goods_group_content {
+  display: flex;
+  flex-wrap: wrap;
+}
+.goods_list .goods_group .goods_group_content .goods_item {
+  width: 33.333%;
+  text-align: center;
+}
+.goods_list .goods_group .goods_group_content .goods_item image {
+  width: 60%;
+}

@@ -1,4 +1,46 @@
 <!-- 搜索框 -->
 <searchInput></searchInput>
-<!-- 循环左边菜单栏 -->
-<view>123456</view>
+
+<view class="cates_view">
+    <!-- 左边的导航菜单栏 -->
+        <scroll-view scroll-y class="menu_group">
+            <view
+            class="menu_item {{currentIndex == index ? 'active' :''}}"
+            wx:for="{{categoriesList}}"
+            wx:for-item="item"
+            wx:for-index="index"
+            wx:key="*this" 
+            data-index="{{index}}"
+            bindtap="bindCurrentIdex"
+            >{{item.cat_name}}</view>
+        </scroll-view>
+    <!-- 右边的详情信息 -->
+        <scroll-view scroll-y class="goods_list">
+            <!-- 四个标题 -->
+            <view 
+            class="goods_group"
+            wx:for="{{detailInfoList}}"
+            wx:for-item="item1"
+            wx:for-index="index1"
+            wx:key="index1">
+            <view class="goods_group_title">
+                <text class="separator">/</text>
+                <text class="group_title">{{item1.cat_name}}</text>
+                <text class="separator">/</text>
+            </view>
+             <!-- 图片和名字 -->
+             <view class="goods_group_content">
+             <navigator
+             class="goods_item"
+             wx:for="{{item1.children}}"
+             wx:for-item="item2"
+             wx:for-index="index2"
+             wx:key="index2"
+             >
+             <image mode="widthFix" src="{{item2.cat_icon}}"></image>
+             <view class="item_name">{{item2.cat_name}}</view>
+         </navigator>
+        </view>
+            </view> 
+        </scroll-view>
+</view>
