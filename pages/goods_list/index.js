@@ -1,66 +1,71 @@
 // pages/goods_list/index.js
+import { request } from '../../request/index.js'
 Page({
-
-  /**
-   * 页面的初始数据
-   */
-  data: {
-
+  data:{
+    tabList:[
+      {id:0,text:"综合"},
+      {id:1,text:"销量"},
+      {id:2,text:"价格"}
+    ],
+    index:0,
+    goodsList:[]
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-
+  searchList:{
+    query:"",
+    cid:"",
+    pagenum:1,
+    pagesize:10
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  // 总页数
+  totalPage:1,
+  handleItemIndex(e) {
+    this.setData({
+      index:e.detail.index
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  getGoodList() {
+    request({
+      url:"/goods/search",
+      data:this.searchList
+    }).then(res=>{
+      console.log(res)
+      const { total } = res.data.message;
+      this.totalPage = Math.ceil(total/this.searchList.pagesize);
+      // 新的数据
+      let arr = this.data.goodsList || []
+      // arr=[...arr ,...res.data.message.goods]
+      this.setData({
+        goodsList:[...arr ,...res.data.message.goods]
+      })
+    })
+    // 关闭下拉刷新数组
+    wx.stopPullDownRefresh()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  onLoad(cid) {
+    this.searchList.cid = cid.cid;
+    this.getGoodList()
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
+  onReachBottom() {
+    this.searchList.pagenum++
+    console.log(this.searchList.pagenum)
+    if(this.searchList.pagenum > this.totalPage) {
+      wx.showToast({
+        title: '没有数据了',
+        icon:"none"
+      })
+    }else {
+      this.getGoodList();
+    }
   },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  // 下拉刷新
+  onPullDownRefresh(){
+    // 页面重回第一页
+    this.searchList.pagenum = 1;
+    // 重置空数组
+    this.setData({
+      goodsList:[]
+    })
+    // 重新发布请求
+    this.getGoodList()
   }
 })

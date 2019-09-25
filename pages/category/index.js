@@ -39,7 +39,7 @@ Page({
   onLoad () {
     let cates = wx.getStorageSync('categories')
     if(cates) {
-      if(Date.now() - cates.Timer > 1000 * 600) { 
+      if(Date.now() - cates.Timer > 1000 * 6) { 
         this.getCategoriesData();
       }else {
         this.Cates=cates.data; 

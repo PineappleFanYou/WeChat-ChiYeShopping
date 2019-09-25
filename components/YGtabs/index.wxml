@@ -1,0 +1,17 @@
+<!--components/YGtabs/index.wxml-->
+<view class="tabs">
+    <view class="tab_title">
+            <view
+            class="tab_title_list {{index ===currentIndex? 'active' :'' }}" 
+            wx:for="{{tabList}}"
+            wx:for-item="item"
+            wx:for-index="index"
+            wx:key="id"
+            bindtap="handleTaps"
+            data-index="{{index}}">{{item.text}}</view>
+        </view>
+        <!-- 内容 -->
+        <view class="tab_content">
+            <slot></slot>
+        </view>
+</view>
