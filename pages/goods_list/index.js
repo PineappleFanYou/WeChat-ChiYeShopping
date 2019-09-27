@@ -28,7 +28,7 @@ Page({
       url:"/goods/search",
       data:this.searchList
     }).then(res=>{
-      console.log(res)
+      // console.log(res)
       const { total } = res.data.message;
       this.totalPage = Math.ceil(total/this.searchList.pagesize);
       // 新的数据
@@ -47,7 +47,6 @@ Page({
   },
   onReachBottom() {
     this.searchList.pagenum++
-    console.log(this.searchList.pagenum)
     if(this.searchList.pagenum > this.totalPage) {
       wx.showToast({
         title: '没有数据了',
